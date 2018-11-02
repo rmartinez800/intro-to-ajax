@@ -67,7 +67,21 @@
   //
   // 7) When the button is clicked again, it should fetch another dog and replace the image
   //    inside of <div id="doggoContainer">. There should be a loop where you click the button,
-  //    get a new dog, click the button, get a new dog, etc.
+  //    get a new dog, click the button, get a new dog, etc.  
+  $('#generateDoggoBtn').click(buttonClkDog)
+
+  function buttonClkDog () {
+    const randomDogURL = 'https://dog.ceo/api/breeds/image/random'
+   $.getJSON(randomDogURL, receiveRandomDog) 
+   $('#generateDoggoBtn').html('Generating Doggo ...').attr('disabled', 'disabled')
+  }
+  
+  function receiveRandomDog (data) {
+    console.log('reciever random dog: ')
+    console.log(data)
+    $('<div img src="https://dog.ceo/api/breeds/image/random">').appendTo('#doggoContainer')
+  }
+  
   //
 
   // TODO: your code goes here :)
