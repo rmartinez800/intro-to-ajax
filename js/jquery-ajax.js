@@ -70,18 +70,36 @@
   //    get a new dog, click the button, get a new dog, etc.  
   $('#generateDoggoBtn').click(buttonClkDog)
 
+  const randomDogURL = 'https://dog.ceo/api/breeds/image/random'
+
   function buttonClkDog () {
-    const randomDogURL = 'https://dog.ceo/api/breeds/image/random'
+    console.log('you clicked the button')
    $.getJSON(randomDogURL, receiveRandomDog) 
-   $('#generateDoggoBtn').html('Generating Doggo ...').attr('disabled', 'disabled')
+   $('generateDoggoBtn').html('Generating Doggo...').attr('disabled', 'disabled')
   }
   
   function receiveRandomDog (data) {
     console.log('reciever random dog: ')
     console.log(data)
-    $('<div img src="https://dog.ceo/api/breeds/image/random">').appendTo('#doggoContainer')
+
+  $('#doggoContainer').html('<img src="' + data.message + '"/>')
+  $('#generateDoggoBtn').html('Generate Doggo').attr('disbaled', false)
   }
-  
+
+  const dogListUrl = 'https://dog.ceo/api/breeds/list'
+
+  $('#selectBreedContainer').html(populateDogList)
+
+  function populateDogList () {
+    console.log('Here we go!')
+    $.getJSON(dogListUrl, receiveDogList)
+  }
+
+  function receiveDogList (data2) {
+    console.log('populating list')
+    console.log(data2)
+    $('#selectBreedContainer').html('<select><option value="' + data2.message.Array(87) + '"></option></option></select>')
+  }
   //
 
   // TODO: your code goes here :)
